@@ -52,4 +52,10 @@ export const reducer = (state, action) => {
       total: overAllTotals.allItems,
     };
   }
+  if (action.type === "LOADING") {
+    return { ...state, loading: true };
+  }
+  if (action.type === "DISPLAY_ITEMS") {
+    return { ...state, cart: action.payload, loading: false };
+  }
 };

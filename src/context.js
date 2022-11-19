@@ -23,6 +23,17 @@ const AppProvider = ({ children }) => {
     },
     [state.cart]
   );
+  useEffect((arg) => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    dispense({ type: "LOADING" });
+    const response = await fetch(url);
+    const data = await response.json();
+
+    dispense({ type: "DISPLAY_ITEMS", payload: data });
+  };
 
   const addItem = (id) => {
     return dispense({ type: "ADD", payload: id });

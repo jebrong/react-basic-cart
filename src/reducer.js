@@ -58,4 +58,26 @@ export const reducer = (state, action) => {
   if (action.type === "DISPLAY_ITEMS") {
     return { ...state, cart: action.payload, loading: false };
   }
+
+  if (action.type === "CHANGE_AMOUNT") {
+    let tempCart = state.cart
+      .map((item) => {
+        if (item.id === action.payload.id) {
+          if (action.payload.type === "add") {
+            return { ...item, amount: item.amount + 1 };
+          }
+          if (action.payload.type === "minus") {
+            return { ...item, amount: item.amount - 1 };
+          }
+        }
+
+        return item;
+      })
+      .filter((arg) => {
+        return arg.amount !== 0;
+      });
+
+    return { ...state, cart: tempCart };
+  }
+  throw new Error("NO ACTION TYPE MATCH!!");
 };

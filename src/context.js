@@ -36,19 +36,23 @@ const AppProvider = ({ children }) => {
   };
 
   const addItem = (id) => {
-    return dispense({ type: "ADD", payload: id });
+    dispense({ type: "ADD", payload: id });
   };
 
   const removeItem = (id) => {
-    return dispense({ type: "REMOVE", payload: id });
+    dispense({ type: "REMOVE", payload: id });
   };
 
   const clearItems = () => {
-    return dispense({ type: "CLEAR" });
+    dispense({ type: "CLEAR" });
   };
 
   const combineTotalItems = () => {
-    return dispense({ type: "TOTAL" });
+    dispense({ type: "TOTAL" });
+  };
+
+  const changeAmount = (id, type) => {
+    dispense({ type: "CHANGE_AMOUNT", payload: { id, type } });
   };
 
   return (
@@ -59,6 +63,7 @@ const AppProvider = ({ children }) => {
         removeItem,
         clearItems,
         combineTotalItems,
+        changeAmount,
       }}
     >
       {children}
